@@ -7,10 +7,9 @@ cmds = ["npm install", "cd server && npm install", "cd client && npm install"]
 [phases.build]
 cmds = ["npm run build"]
 
-[variables]
-DATABASE_URL = "postgresql://placeholder"
-JWT_SECRET = "build-placeholder"
-ANTHROPIC_API_KEY = "sk-ant-placeholder"
+# Runtime env vars (DATABASE_URL, JWT_SECRET, ANTHROPIC_API_KEY) are set in the
+# Railway service "Variables" tab — never hardcode placeholders here, or they get
+# baked into the image and override the real values at runtime.
 
 [start]
 cmd = "npm start"
