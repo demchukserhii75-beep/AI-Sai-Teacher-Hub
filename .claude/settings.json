@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('fiber',p.dependencies['@react-three/fiber']\\); console.log\\('drei',p.dependencies['@react-three/drei']\\); console.log\\('three',p.dependencies['three']\\); console.log\\('framer',p.dependencies['framer-motion']\\); console.log\\('react',p.dependencies['react']\\);\")",
+      "Bash(curl -s -o /tmp/page.html -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"main.tsx: %{http_code}\\\\n\" http://localhost:5173/src/main.tsx)",
+      "Bash(pkill -f \"vite\")",
+      "WebFetch(domain:aisai-production-c569.up.railway.app)"
+    ]
+  }
+}

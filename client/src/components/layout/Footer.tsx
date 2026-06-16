@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 px-6 py-4 text-center text-sm text-gray-500">
+    <footer className="relative border-t border-white/40 bg-white/40 px-6 py-5 text-center text-sm text-ink/50 backdrop-blur-sm">
       <p>
-        <strong>AI-SAI Teacher Hub</strong> — Plataforma Educacional para Sala de Aula Invertida
+        <strong className="text-ink/70">AI-SAI Teacher Hub</strong> — Plataforma Educacional para Sala de Aula Invertida
       </p>
       <p className="mt-1">
         Data de criação: 31 de março de 2026 · Todos os direitos reservados

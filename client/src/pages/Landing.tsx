@@ -1,95 +1,222 @@
 import { useNavigate } from 'react-router-dom';
-import {  Sparkles, Brain, BarChart3, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sparkles, Brain, BarChart3, ArrowRight, Wand2, CheckCircle2 } from 'lucide-react';
+import AuroraBackground from '../components/visual/AuroraBackground';
+import BrandMark from '../components/visual/BrandMark';
+import Hero3D from '../components/visual/Hero3D';
+import TiltCard from '../components/visual/TiltCard';
+
+const features = [
+  {
+    icon: Sparkles,
+    title: 'Planos com IA Conversacional',
+    desc: 'A IA faz perguntas, entende seu contexto e gera planos de aula estruturados para pré-aula, aula presencial e avaliação.',
+    grad: 'from-brand-500 to-accent-violet',
+  },
+  {
+    icon: Brain,
+    title: 'Materiais Editáveis',
+    desc: 'Quizzes, resumos, roteiros de vídeo e atividades colaborativas — todos editáveis e adaptáveis ao seu contexto.',
+    grad: 'from-accent-cyan to-brand-500',
+  },
+  {
+    icon: BarChart3,
+    title: 'Reflexão e Crescimento',
+    desc: 'Registre percepções, dificuldades e melhorias. A IA sugere ajustes baseados em padrões comprovados.',
+    grad: 'from-accent-pink to-accent-violet',
+  },
+];
+
+const reveal = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
-      {/* Hero */}
-      <header className="px-6 py-4 flex items-center justify-between max-w-6xl mx-auto">
-        <div className="flex items-center gap-3">
-          <img
-            src="/Gemini_Generated_Image_8ii5l8ii5l8ii5l8-removebg-preview.png"
-            alt="AI-SAI Logo"
-            className=" h-[100px] t-contain"
-          />
-        </div>
-        <div className="flex gap-3">
-          <button
-            onClick={() => navigate('/login')}
-            className="px-4 py-2 text-sm text-indigo-600 hover:text-indigo-800"
-          >
-            Entrar
+    <div className="relative min-h-screen overflow-x-hidden">
+      <AuroraBackground />
+
+      {/* Floating glass header */}
+      <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 sm:px-4">
+        <motion.div
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 16, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+          className="glass flex w-full max-w-5xl items-center justify-between rounded-full px-3 py-2 shadow-glass"
+        >
+          <button onClick={() => navigate('/')} className="px-1.5" aria-label="Início">
+            <BrandMark />
           </button>
-          <button
-            onClick={() => navigate('/register')}
-            className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-          >
-            Cadastrar
-          </button>
-        </div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => navigate('/login')}
+              className="rounded-full px-4 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-white/60 hover:text-ink"
+            >
+              Entrar
+            </button>
+            <motion.button
+              onClick={() => navigate('/register')}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="rounded-full bg-brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-glow-sm"
+            >
+              Cadastrar
+            </motion.button>
+          </div>
+        </motion.div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-6">
-            Transforme suas aulas com a
-            <br />
-            <span className="text-indigo-600">Sala de Aula Invertida</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Seu assistente pedagógico inteligente para planejar, executar e avaliar
-            aulas no modelo invertido. A IA guia — você decide.
-          </p>
-          <button
-            onClick={() => navigate('/register')}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 text-white text-lg rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200"
+      {/* Hero */}
+      <section className="mx-auto grid max-w-6xl items-center gap-8 px-6 pb-12 pt-32 lg:grid-cols-2 lg:pt-40">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          transition={{ staggerChildren: 0.12 }}
+          className="text-center lg:text-left"
+        >
+          <motion.span
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-brand-700 shadow-glass"
           >
-            Começar Agora
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+            <Wand2 className="h-4 w-4" />
+            Assistente pedagógico com IA
+          </motion.span>
 
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
-              <Sparkles className="w-6 h-6 text-indigo-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">Planos com IA Conversacional</h3>
-            <p className="text-sm text-gray-600">
-              A IA faz perguntas, entende seu contexto e gera planos de aula
-              estruturados para pré-aula, aula presencial e avaliação.
+          <motion.h1
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl"
+          >
+            Transforme suas aulas com a{' '}
+            <span className="text-gradient">Sala de Aula Invertida</span>
+          </motion.h1>
+
+          <motion.p
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-6 max-w-xl text-lg text-ink/60 lg:mx-0"
+          >
+            Planeje, execute e avalie aulas no modelo invertido com um copiloto
+            inteligente. A IA guia — você decide.
+          </motion.p>
+
+          <motion.div
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-9 flex flex-col items-center gap-3 sm:flex-row lg:justify-start"
+          >
+            <motion.button
+              onClick={() => navigate('/register')}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="group inline-flex items-center gap-2 rounded-xl bg-brand-gradient px-7 py-3.5 text-base font-semibold text-white shadow-glow"
+            >
+              Começar Agora
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+            <button
+              onClick={() => navigate('/login')}
+              className="glass inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-semibold text-ink/80 shadow-glass transition-colors hover:text-ink"
+            >
+              Já tenho conta
+            </button>
+          </motion.div>
+
+          <motion.ul
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink/55 lg:justify-start"
+          >
+            {['Planos em minutos', 'Materiais prontos', 'Reflexão guiada'].map((t) => (
+              <li key={t} className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-brand-500" />
+                {t}
+              </li>
+            ))}
+          </motion.ul>
+        </motion.div>
+
+        {/* 3D hero visual */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          className="relative mx-auto aspect-square w-full max-w-lg"
+        >
+          <div className="absolute inset-6 rounded-full bg-brand-gradient opacity-20 blur-3xl" />
+          <Hero3D />
+        </motion.div>
+      </section>
+
+      {/* Features */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ staggerChildren: 0.15 }}
+          className="grid grid-cols-1 gap-6 md:grid-cols-3"
+        >
+          {features.map((f) => (
+            <motion.div
+              key={f.title}
+              variants={reveal}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <TiltCard className="h-full">
+                <div className="glass h-full rounded-3xl p-7 shadow-glass">
+                  <div
+                    className={`mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${f.grad} shadow-glow-sm`}
+                    style={{ transform: 'translateZ(40px)' }}
+                  >
+                    <f.icon className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="mb-2 font-display text-xl font-bold text-ink">{f.title}</h3>
+                  <p className="text-sm leading-relaxed text-ink/60">{f.desc}</p>
+                </div>
+              </TiltCard>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* CTA strip */}
+      <section className="mx-auto max-w-6xl px-6 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden rounded-3xl bg-ink px-8 py-14 text-center shadow-glass-lg"
+        >
+          <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-brand-500/40 blur-3xl animate-aurora" />
+          <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-accent-violet/40 blur-3xl animate-aurora [animation-delay:-8s]" />
+          <div className="relative">
+            <h2 className="font-display text-3xl font-extrabold text-white sm:text-4xl">
+              Pronto para inverter sua sala de aula?
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-white/70">
+              Crie seu primeiro plano de aula com IA em poucos minutos. É grátis para começar.
             </p>
+            <motion.button
+              onClick={() => navigate('/register')}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-ink shadow-glow"
+            >
+              Começar gratuitamente
+              <ArrowRight className="h-5 w-5" />
+            </motion.button>
           </div>
+        </motion.div>
+      </section>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-              <Brain className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">Materiais Editáveis</h3>
-            <p className="text-sm text-gray-600">
-              Quizzes, resumos, roteiros de vídeo e atividades colaborativas —
-              todos editáveis e adaptáveis ao seu contexto.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-              <BarChart3 className="w-6 h-6 text-amber-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">Reflexão e Crescimento</h3>
-            <p className="text-sm text-gray-600">
-              Registre percepções, dificuldades e melhorias. A IA sugere ajustes
-              baseados em padrões comprovados.
-            </p>
-          </div>
-        </div>
-      </main>
-
-      <footer className="text-center py-8 text-sm text-gray-400">
-        AI-SAI Teacher Hub · Data de criação: 31 de março de 2026
+      <footer className="relative py-8 text-center text-sm text-ink/40">
+        AI-SAI Teacher Hub · Plataforma para Sala de Aula Invertida
       </footer>
     </div>
   );
