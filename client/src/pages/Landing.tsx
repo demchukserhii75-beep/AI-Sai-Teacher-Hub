@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Brain, BarChart3, ArrowRight, Wand2, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Brain, BarChart3, ArrowRight, Wand2, CheckCircle2, Star } from 'lucide-react';
 import AuroraBackground from '../components/visual/AuroraBackground';
 import BrandMark from '../components/visual/BrandMark';
 import Hero3D from '../components/visual/Hero3D';
 import TiltCard from '../components/visual/TiltCard';
+import Testimonials from '../components/landing/Testimonials';
+
+const proofAvatars = ['/people/a1.jpg', '/people/a2.jpg', '/people/a3.jpg', '/people/a4.jpg', '/people/a5.jpg'];
 
 const features = [
   {
@@ -138,6 +141,36 @@ export default function Landing() {
               </li>
             ))}
           </motion.ul>
+
+          {/* Social proof — real faces */}
+          <motion.div
+            variants={reveal}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 flex items-center justify-center gap-3 lg:justify-start"
+          >
+            <div className="flex -space-x-3">
+              {proofAvatars.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Professor ${i + 1}`}
+                  loading="lazy"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-sm"
+                />
+              ))}
+            </div>
+            <div className="text-left">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                ))}
+                <span className="ml-1 text-sm font-semibold text-ink">4,9</span>
+              </div>
+              <p className="text-xs text-ink/55">+2.000 professores já planejam com a AI-SAI</p>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* 3D hero visual */}
@@ -183,6 +216,9 @@ export default function Landing() {
           ))}
         </motion.div>
       </section>
+
+      {/* Testimonials — real educators */}
+      <Testimonials />
 
       {/* CTA strip */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
